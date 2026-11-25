@@ -1,0 +1,1902 @@
+<!doctype html>
+<html lang="ur" dir="rtl" translate="no">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no" />
+  <meta name="theme-color" content="#0f3d26" />
+  <meta name="mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <link rel="manifest" href="./manifest.json" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@500;600;700;800&family=IBM+Plex+Sans+Arabic:wght@400;500;600;700&family=Tajawal:wght@500;700;800&display=swap" rel="stylesheet" />
+  <title>ارسلان مرتضیٰ اینڈ برادرز — حساب ایپ</title>
+  <style>
+    :root {
+      --p1: #0b3320;
+      --p2: #196841;
+      --accent: #eab308;
+      --accent-soft: #fef9c3;
+      --bg1: #e9f3ec;
+      --bg2: #f7fbf8;
+      --card: #ffffff;
+      --line: #cfe1d5;
+      --text: #0f2117;
+      --muted: #52685a;
+      --danger: #b91c1c;
+      --danger-bg: #fef2f2;
+      --ok: #15803d;
+      --ok-bg: #dcfce7;
+      --shadow: 0 14px 32px rgba(11, 51, 32, 0.12);
+      --shadow-sm: 0 6px 16px rgba(11, 51, 32, 0.08);
+      --r-lg: 22px;
+      --r-md: 16px;
+      --r-sm: 12px;
+      --ease-spring: cubic-bezier(0.22, 1, 0.36, 1);
+      --urdu-font: "IBM Plex Sans Arabic", "Cairo", "Tajawal", "Noto Naskh Arabic", system-ui, Arial, sans-serif;
+    }
+
+    body.theme-royal {
+      --p1: #12204a;
+      --p2: #1d4ed8;
+      --accent: #38bdf8;
+      --accent-soft: #e0f2fe;
+      --bg1: #eaf2ff;
+      --bg2: #f8faff;
+      --line: #cfe0fc;
+      --text: #0c1633;
+      --muted: #465878;
+      --shadow: 0 14px 32px rgba(18, 32, 74, 0.13);
+    }
+
+    body.theme-amber {
+      --p1: #3f1703;
+      --p2: #b45309;
+      --accent: #facc15;
+      --accent-soft: #fef3c7;
+      --bg1: #fff9e6;
+      --bg2: #fffdf5;
+      --line: #fae09b;
+      --text: #261004;
+      --muted: #75370d;
+      --shadow: 0 14px 32px rgba(63, 23, 3, 0.13);
+    }
+
+    *, *::before, *::after {
+      box-sizing: border-box;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    .pin-keypad, .pin-dots, .top-chrome, .ptr-banner, .app-footer {
+      -webkit-user-select: none;
+      -moz-user-select: none;
+      -ms-user-select: none;
+      user-select: none;
+    }
+
+    @keyframes auroraFlow {
+      0% { background-position: 0% 15%; }
+      50% { background-position: 100% 85%; }
+      100% { background-position: 0% 15%; }
+    }
+
+    @keyframes headerSlideDown {
+      0% { transform: translateY(-22px); opacity: 0; }
+      100% { transform: translateY(0); opacity: 1; }
+    }
+
+    @keyframes viewEnter {
+      0% { transform: translateY(16px) scale(0.99); opacity: 0; }
+      100% { transform: translateY(0) scale(1); opacity: 1; }
+    }
+
+    @keyframes tilePop {
+      0% { transform: translateY(14px) scale(0.95); opacity: 0; }
+      100% { transform: translateY(0) scale(1); opacity: 1; }
+    }
+
+    @keyframes floatSoft {
+      0%, 100% { transform: translateY(0) scale(1); }
+      50% { transform: translateY(-3px) scale(1.03); }
+    }
+
+    @keyframes harvestPulse {
+      0%, 100% { transform: scale(1) rotate(0deg); }
+      50% { transform: scale(1.16) rotate(-8deg); }
+    }
+
+    @keyframes sheetRise {
+      0% { transform: translateY(28px) scale(0.96); opacity: 0; }
+      100% { transform: translateY(0) scale(1); opacity: 1; }
+    }
+
+    @keyframes toastIn {
+      0% { transform: translateX(-20px) scale(0.95); opacity: 0; }
+      100% { transform: translateX(0) scale(1); opacity: 1; }
+    }
+
+    html, body {
+      overscroll-behavior-y: none;
+    }
+
+    body {
+      margin: 0;
+      min-height: 100dvh;
+      font-family: var(--urdu-font);
+      color: var(--text);
+      background:
+        radial-gradient(circle at 85% 8%, rgba(234, 179, 8, 0.11), transparent 36%),
+        linear-gradient(135deg, var(--bg1), var(--bg2), var(--accent-soft), var(--bg1));
+      background-size: 240% 240%;
+      animation: auroraFlow 18s ease-in-out infinite;
+      line-height: 1.65;
+      overflow-x: hidden;
+    }
+
+    .ptr-banner {
+      position: fixed;
+      top: 64px;
+      left: 50%;
+      transform: translate(-50%, -140px);
+      z-index: 60;
+      background: linear-gradient(135deg, var(--p1), var(--p2));
+      color: #fff;
+      border: 1.5px solid rgba(255, 255, 255, 0.25);
+      border-radius: 999px;
+      padding: 7px 16px;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-family: var(--urdu-font);
+      font-size: 0.85rem;
+      font-weight: 800;
+      box-shadow: var(--shadow);
+      opacity: 0;
+      pointer-events: none;
+      transition: transform 0.28s var(--ease-spring), opacity 0.22s ease;
+    }
+
+    .ptr-banner.visible {
+      opacity: 1;
+    }
+
+    .ptr-banner.refreshing .ptr-icon {
+      animation: harvestPulse 0.7s ease-in-out infinite;
+    }
+
+    .ptr-icon {
+      font-size: 1.05rem;
+      transition: transform 0.2s ease;
+      display: inline-block;
+    }
+
+    header.topbar {
+      position: sticky;
+      top: 0;
+      z-index: 30;
+      background: linear-gradient(130deg, var(--p1), var(--p2));
+      color: #fff;
+      padding: 13px 14px;
+      box-shadow: 0 10px 26px rgba(0, 0, 0, 0.2);
+      border-bottom: 2px solid rgba(255, 255, 255, 0.18);
+      animation: headerSlideDown 0.45s var(--ease-spring) both;
+    }
+
+    .topbar-row {
+      max-width: 960px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+    }
+
+    .brand-box {
+      display: flex;
+      align-items: center;
+      gap: 11px;
+      cursor: pointer;
+      transition: transform 0.25s var(--ease-spring);
+    }
+
+    .brand-box:active { transform: scale(0.98); }
+
+    .brand-badge {
+      width: 46px;
+      height: 46px;
+      border-radius: 15px;
+      background: linear-gradient(145deg, var(--accent), #fde047);
+      color: var(--p1);
+      display: grid;
+      place-items: center;
+      font-size: 1.4rem;
+      font-weight: 900;
+      box-shadow: 0 6px 16px rgba(0, 0, 0, 0.25);
+      animation: floatSoft 3.8s ease-in-out infinite;
+    }
+
+    .brand-box h1 { margin: 0; font-size: 1.15rem; font-weight: 800; line-height: 1.45; font-family: var(--urdu-font); }
+    .brand-box p { margin: 2px 0 0; font-size: 0.78rem; opacity: 0.92; line-height: 1.4; font-family: var(--urdu-font); }
+
+    .dots-wrap { position: relative; }
+
+    .dots-btn {
+      width: 42px;
+      height: 42px;
+      border-radius: 13px;
+      border: 1px solid rgba(255, 255, 255, 0.28);
+      background: rgba(255, 255, 255, 0.15);
+      color: #fff;
+      font-size: 1.35rem;
+      font-weight: 900;
+      cursor: pointer;
+      display: grid;
+      place-items: center;
+      transition: transform 0.2s var(--ease-spring), background 0.2s ease;
+    }
+
+    .dots-btn:hover { background: rgba(255, 255, 255, 0.24); }
+    .dots-btn:active { transform: scale(0.92); }
+
+    .dots-menu {
+      display: none;
+      position: absolute;
+      top: 48px;
+      left: 0;
+      min-width: 210px;
+      background: var(--card);
+      color: var(--text);
+      border: 1.5px solid var(--line);
+      border-radius: var(--r-md);
+      box-shadow: var(--shadow);
+      padding: 7px;
+      z-index: 45;
+      animation: sheetRise 0.25s var(--ease-spring) both;
+    }
+
+    .dots-menu.open { display: block; }
+
+    .dots-item {
+      width: 100%;
+      background: transparent;
+      border: 0;
+      border-radius: 11px;
+      padding: 10px 12px;
+      text-align: right;
+      font-family: var(--urdu-font);
+      font-size: 0.92rem;
+      line-height: 1.45;
+      font-weight: 700;
+      color: var(--text);
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      transition: background 0.18s ease, transform 0.18s var(--ease-spring);
+    }
+
+    .dots-item:hover { background: var(--bg1); color: var(--p1); transform: translateX(-2px); }
+
+    main.stage {
+      max-width: 960px;
+      margin: 0 auto;
+      padding: 15px 12px 36px;
+      transition: transform 0.25s var(--ease-spring);
+    }
+
+    section.view { display: none; }
+    section.view.active {
+      display: block;
+      animation: viewEnter 0.38s var(--ease-spring) both;
+    }
+
+    .tab-bar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 8px;
+      margin-bottom: 12px;
+      background: linear-gradient(120deg, var(--card), var(--bg2));
+      border: 1.5px solid var(--line);
+      border-radius: var(--r-md);
+      padding: 9px 13px;
+      box-shadow: var(--shadow-sm);
+    }
+
+    .tab-bar h2 { margin: 0; font-size: 1.05rem; font-weight: 800; color: var(--p1); line-height: 1.45; font-family: var(--urdu-font); }
+
+    .back-chip {
+      background: var(--bg1);
+      color: var(--p1);
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      padding: 5px 14px;
+      font-family: var(--urdu-font);
+      font-size: 0.84rem;
+      line-height: 1.4;
+      font-weight: 700;
+      cursor: pointer;
+      transition: transform 0.2s var(--ease-spring), background 0.2s ease;
+    }
+
+    .back-chip:hover { background: var(--accent-soft); }
+    .back-chip:active { transform: scale(0.94); }
+
+    .hub-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 11px;
+      margin-bottom: 14px;
+    }
+
+    @media (min-width: 640px) {
+      .hub-grid { grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 13px; }
+    }
+
+    .hub-tile {
+      position: relative;
+      overflow: hidden;
+      background: linear-gradient(160deg, var(--card), var(--bg2));
+      border: 1.5px solid var(--line);
+      border-radius: var(--r-lg);
+      padding: 16px 10px;
+      text-align: center;
+      cursor: pointer;
+      box-shadow: var(--shadow-sm);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      animation: tilePop 0.42s var(--ease-spring) both;
+      transition: transform 0.26s var(--ease-spring), box-shadow 0.26s ease, border-color 0.26s ease;
+    }
+
+    .hub-tile::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(120deg, transparent 35%, rgba(255, 255, 255, 0.35) 50%, transparent 65%);
+      transform: translateX(-140%);
+      transition: transform 0.6s var(--ease-spring);
+      pointer-events: none;
+    }
+
+    .hub-tile:hover {
+      border-color: var(--p2);
+      transform: translateY(-4px);
+      box-shadow: var(--shadow);
+    }
+
+    .hub-tile:hover::after { transform: translateX(140%); }
+    .hub-tile:active { transform: scale(0.97); }
+
+    .hub-icon {
+      width: 52px;
+      height: 52px;
+      border-radius: 16px;
+      background: linear-gradient(135deg, var(--accent-soft), var(--bg1));
+      border: 1.5px solid var(--line);
+      display: grid;
+      place-items: center;
+      font-size: 1.55rem;
+      box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.8);
+      animation: floatSoft 4.2s ease-in-out infinite;
+    }
+
+    .hub-title { font-size: 0.98rem; font-weight: 800; color: var(--p1); line-height: 1.45; font-family: var(--urdu-font); }
+    .hub-sub { font-size: 0.76rem; color: var(--muted); line-height: 1.4; font-family: var(--urdu-font); }
+
+    .card {
+      background: linear-gradient(180deg, var(--card), #fcfefd);
+      border: 1.5px solid var(--line);
+      border-radius: var(--r-lg);
+      padding: 15px;
+      margin-bottom: 13px;
+      box-shadow: var(--shadow-sm);
+      animation: viewEnter 0.38s var(--ease-spring) both;
+    }
+
+    h2 { font-size: 1.08rem; margin: 0 0 10px; color: var(--p1); font-weight: 800; line-height: 1.45; font-family: var(--urdu-font); }
+    h3 { font-size: 0.98rem; margin: 0 0 8px; color: var(--p1); font-weight: 800; line-height: 1.45; font-family: var(--urdu-font); }
+
+    .grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; }
+    @media (max-width: 520px) { .grid { grid-template-columns: 1fr; } }
+
+    .stats-3 { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; }
+    @media (min-width: 680px) { .stats-3 { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
+
+    .stat {
+      padding: 12px 13px;
+      border-radius: var(--r-md);
+      background: linear-gradient(145deg, var(--bg1), #ffffff);
+      border: 1px solid var(--line);
+      border-right: 4px solid var(--p2);
+      box-shadow: 0 3px 10px rgba(11, 51, 32, 0.05);
+      transition: transform 0.2s var(--ease-spring);
+    }
+
+    .stat:hover { transform: translateY(-2px); }
+    .stat small { display: block; color: var(--muted); font-size: 0.78rem; font-weight: 600; line-height: 1.4; font-family: var(--urdu-font); }
+    .stat b { display: block; font-size: 1.06rem; font-weight: 800; color: var(--p1); margin-top: 2px; line-height: 1.4; font-family: var(--urdu-font); }
+
+    label { display: block; font-size: 0.86rem; font-weight: 700; margin: 8px 0 4px; color: var(--text); line-height: 1.45; font-family: var(--urdu-font); }
+
+    .app-field, select, textarea {
+      width: 100%;
+      padding: 10px 12px;
+      border: 1.5px solid #bfd3c5;
+      border-radius: var(--r-sm);
+      background: #fff;
+      font-family: var(--urdu-font);
+      font-size: 0.95rem;
+      line-height: 1.5;
+      color: var(--text);
+      transition: border-color 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    .app-field:focus, select:focus, textarea:focus { outline: none; border-color: var(--p2); box-shadow: 0 0 0 3px var(--accent-soft); }
+    textarea { min-height: 62px; }
+
+    button.primary {
+      background: linear-gradient(135deg, var(--p1), var(--p2));
+      color: #fff;
+      border: 0;
+      border-radius: var(--r-sm);
+      padding: 11px 14px;
+      font-family: var(--urdu-font);
+      font-size: 0.96rem;
+      line-height: 1.45;
+      font-weight: 800;
+      width: 100%;
+      margin-top: 12px;
+      cursor: pointer;
+      box-shadow: 0 7px 18px rgba(15, 61, 38, 0.22);
+      transition: transform 0.2s var(--ease-spring), box-shadow 0.2s ease;
+    }
+
+    button.primary:hover { box-shadow: 0 10px 22px rgba(15, 61, 38, 0.28); }
+    button.primary:active { transform: scale(0.98); }
+
+    button.secondary {
+      background: var(--bg1);
+      color: var(--p1);
+      border: 1px solid var(--line);
+      border-radius: var(--r-sm);
+      padding: 6px 10px;
+      font-family: var(--urdu-font);
+      font-size: 0.82rem;
+      line-height: 1.4;
+      font-weight: 700;
+      cursor: pointer;
+      transition: transform 0.18s var(--ease-spring), background 0.18s ease;
+    }
+
+    button.secondary:hover { background: var(--accent-soft); }
+    button.secondary:active { transform: scale(0.95); }
+
+    button.danger {
+      background: var(--danger-bg);
+      color: var(--danger);
+      border: 1px solid #fecaca;
+      border-radius: var(--r-sm);
+      padding: 6px 10px;
+      font-family: var(--urdu-font);
+      font-size: 0.82rem;
+      line-height: 1.4;
+      font-weight: 700;
+      cursor: pointer;
+      transition: transform 0.18s var(--ease-spring), background 0.18s ease;
+    }
+
+    button.danger:active { transform: scale(0.95); }
+
+    .row-btns { display: flex; gap: 5px; flex-wrap: wrap; }
+
+    .muted { color: var(--muted); font-size: 0.84rem; line-height: 1.55; font-family: var(--urdu-font); }
+
+    .notice {
+      background: var(--accent-soft);
+      border: 1px solid #eab30870;
+      padding: 10px 12px;
+      border-radius: var(--r-sm);
+      font-family: var(--urdu-font);
+      font-size: 0.84rem;
+      line-height: 1.6;
+      margin-top: 8px;
+    }
+
+    .table-wrap { overflow-x: auto; border-radius: var(--r-sm); border: 1px solid var(--line); }
+    table { width: 100%; border-collapse: collapse; font-family: var(--urdu-font); font-size: 0.86rem; background: #fff; }
+    th, td { padding: 9px 8px; border-bottom: 1px solid var(--line); text-align: right; vertical-align: top; line-height: 1.5; }
+    th { background: var(--bg1); color: var(--p1); font-weight: 800; white-space: nowrap; }
+    tr:hover td { background: #fafdfb; }
+
+    .pill { display: inline-block; padding: 2px 9px; border-radius: 999px; background: var(--ok-bg); color: var(--ok); font-size: 0.74rem; line-height: 1.35; font-weight: 700; font-family: var(--urdu-font); }
+    .pill-out { background: var(--danger-bg); color: var(--danger); }
+
+    .actions { display: flex; gap: 8px; flex-wrap: wrap; }
+    .actions > * { flex: 1; min-width: 130px; }
+    .hidden { display: none !important; }
+
+    footer.app-footer {
+      max-width: 960px;
+      margin: 8px auto 28px;
+      padding: 12px 14px;
+      text-align: center;
+      color: var(--muted);
+      font-size: 0.82rem;
+      font-weight: 700;
+      border-top: 1px solid var(--line);
+      direction: ltr;
+    }
+
+    .overlay {
+      display: none;
+      position: fixed;
+      inset: 0;
+      z-index: 70;
+      background: rgba(9, 22, 15, 0.66);
+      backdrop-filter: blur(3px);
+      align-items: flex-end;
+      justify-content: center;
+      padding: 10px;
+    }
+
+    .overlay.center { align-items: center; }
+    .overlay.open { display: flex; }
+
+    .sheet {
+      width: 100%;
+      max-width: 540px;
+      max-height: 92dvh;
+      overflow-y: auto;
+      background: var(--card);
+      border: 2px solid var(--p2);
+      border-radius: var(--r-lg);
+      padding: 15px;
+      box-shadow: 0 24px 60px rgba(0, 0, 0, 0.36);
+      animation: sheetRise 0.3s var(--ease-spring) both;
+    }
+
+    .pin-dots { display: flex; justify-content: center; gap: 10px; margin: 12px 0; direction: ltr; }
+    .pin-slot {
+      width: 44px;
+      height: 48px;
+      border-radius: 12px;
+      border: 2px solid var(--line);
+      background: var(--bg1);
+      display: grid;
+      place-items: center;
+      font-size: 1.35rem;
+      font-weight: 900;
+      color: var(--p1);
+      transition: transform 0.15s var(--ease-spring), border-color 0.15s ease;
+    }
+
+    .pin-keypad { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 6px; direction: ltr; }
+
+    .kb-key {
+      padding: 9px 4px;
+      border-radius: 10px;
+      border: 1px solid #c6d6ca;
+      background: #f8fbf9;
+      color: var(--text);
+      font-family: var(--urdu-font);
+      font-size: 1rem;
+      line-height: 1.4;
+      font-weight: 800;
+      cursor: pointer;
+      text-align: center;
+      transition: transform 0.12s var(--ease-spring), background 0.15s ease;
+    }
+    .kb-key:hover { background: #edf5ef; }
+    .kb-key:active { background: var(--accent-soft); transform: scale(0.92); }
+    .kb-key.action { background: var(--bg1); color: var(--p1); font-size: 0.9rem; }
+    .kb-key.danger-k { background: var(--danger-bg); color: var(--danger); }
+
+    .slip-box {
+      background: #ffffff;
+      border: 2px solid var(--p1);
+      border-radius: 16px;
+      padding: 14px;
+      color: #111827;
+      font-family: var(--urdu-font);
+    }
+    .slip-head {
+      text-align: center;
+      background: #f0fdf4;
+      border: 1px solid #bbf7d0;
+      border-radius: 12px;
+      padding: 10px;
+      margin-bottom: 10px;
+    }
+    .slip-head h3 { margin: 0; font-size: 1.1rem; font-weight: 800; color: #064e3b; line-height: 1.45; }
+    .slip-head p { margin: 2px 0 0; font-size: 0.8rem; color: #334155; font-weight: 600; line-height: 1.4; }
+
+    .slip-line {
+      display: flex;
+      justify-content: space-between;
+      gap: 10px;
+      padding: 6px 0;
+      border-bottom: 1px dashed #cbd5e1;
+      font-size: 0.88rem;
+      line-height: 1.5;
+    }
+    .slip-line:last-child { border-bottom: none; }
+    .slip-line strong { color: #064e3b; }
+
+    .slip-amount-box {
+      margin-top: 8px;
+      background: #f8fafc;
+      border: 1.5px solid #94a3b8;
+      border-radius: 12px;
+      padding: 10px 12px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 1rem;
+      line-height: 1.45;
+      font-weight: 800;
+      color: #064e3b;
+    }
+
+    .toast-box {
+      position: fixed;
+      top: 72px;
+      left: 12px;
+      z-index: 95;
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      pointer-events: none;
+    }
+    .toast {
+      background: var(--p1);
+      color: #fff;
+      border-right: 4px solid var(--accent);
+      padding: 9px 14px;
+      border-radius: 12px;
+      font-family: var(--urdu-font);
+      font-size: 0.86rem;
+      line-height: 1.45;
+      font-weight: 700;
+      box-shadow: var(--shadow);
+      animation: toastIn 0.28s var(--ease-spring) both;
+    }
+  </style>
+</head>
+<body>
+  <div class="toast-box" id="toastBox"></div>
+
+  <div class="ptr-banner" id="ptrBanner" aria-hidden="true">
+    <span class="ptr-icon" id="ptrIcon">🌾</span>
+    <span id="ptrText">کھینچ کر حساب تازہ کریں</span>
+  </div>
+
+  <header class="topbar top-chrome">
+    <div class="topbar-row">
+      <div class="brand-box" onclick="navigateTab('home')">
+        <div class="brand-badge">🌾</div>
+        <div>
+          <h1>ارسلان مرتضیٰ اینڈ برادرز</h1>
+          <p id="topShopSub">آڑھت، زرعی اسٹور اور مکمل کاروباری حساب</p>
+        </div>
+      </div>
+
+      <div class="dots-wrap">
+        <button class="dots-btn" id="dotsBtn" type="button" aria-label="مزید آپشنز" onclick="toggleDotsMenu(event)">⋮</button>
+        <div class="dots-menu" id="dotsMenu">
+          <button class="dots-item" type="button" onclick="closeDotsMenu(); navigateTab('reports')">📊 رپورٹس و سرچ</button>
+          <button class="dots-item" type="button" onclick="closeDotsMenu(); navigateTab('backup')">💾 ڈیٹا بیک اَپ</button>
+          <button class="dots-item" type="button" onclick="closeDotsMenu(); navigateTab('settings')">⚙️ سیٹنگز و PIN</button>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main class="stage" id="appStage">
+    <section id="home" class="view active">
+      <div class="hub-grid">
+        <div class="hub-tile" style="animation-delay:0.04s" onclick="navigateTab('entry')">
+          <div class="hub-icon">✍️</div>
+          <div class="hub-title">نیا اندراج</div>
+          <div class="hub-sub">فصل، وصولی، ادائیگی</div>
+        </div>
+        <div class="hub-tile" style="animation-delay:0.09s" onclick="navigateTab('accounts')">
+          <div class="hub-icon">📒</div>
+          <div class="hub-title">کھاتے</div>
+          <div class="hub-sub">کسان، خریدار، پلیدار</div>
+        </div>
+        <div class="hub-tile" style="animation-delay:0.14s" onclick="navigateTab('stock')">
+          <div class="hub-icon">🌿</div>
+          <div class="hub-title">اسٹاک</div>
+          <div class="hub-sub">سپرے، کھاد، بیج</div>
+        </div>
+        <div class="hub-tile" style="animation-delay:0.19s" onclick="navigateTab('fund')">
+          <div class="hub-icon">🕌</div>
+          <div class="hub-title">عشر و زکوٰۃ</div>
+          <div class="hub-sub">فنڈ اور زکوٰۃ حساب</div>
+        </div>
+      </div>
+
+      <div class="stats-3">
+        <div class="stat"><small>آج کے اندراجات</small><b id="todayCount">0</b></div>
+        <div class="stat"><small>اسٹاک آئٹمز</small><b id="stockCount">0</b></div>
+        <div class="stat"><small>پلیداری کھاتے میں جمع</small><b id="laborFund">0 روپے</b></div>
+        <div class="stat"><small>بروکری کھاتے میں جمع</small><b id="brokerFund">0 روپے</b></div>
+        <div class="stat"><small>ٹیکس کھاتے میں جمع</small><b id="taxFund">0 روپے</b></div>
+        <div class="stat"><small>عشر و زکوٰۃ فنڈ بیلنس</small><b id="charityFund">0 روپے</b></div>
+      </div>
+
+      <div class="card" style="margin-top:12px;">
+        <h2>کاروباری اصول</h2>
+        <p class="muted">کسان کی فصل پر 1.45% کٹوتی خودکار تقسیم: 1% پلیداری، 0.15% بروکری، 0.30% ٹیکس۔ خریدار کے کھاتے میں فصل کی قیمت کے ساتھ 1.6% کمیشن شامل ہوگا۔</p>
+        <div class="notice">یہ آف لائن ورژن ہے۔ ڈیٹا اسی ڈیوائس اور براؤزر میں محفوظ ہوتا ہے۔ براؤزر/ڈیوائس تبدیل کرنے سے پہلے بیک اَپ ضرور ڈاؤن لوڈ کریں۔</div>
+      </div>
+
+      <div class="card">
+        <h3>حالیہ اندراجات (ترمیم، حذف و رسید)</h3>
+        <div id="recent"></div>
+      </div>
+    </section>
+
+    <section id="entry" class="view">
+      <div class="tab-bar">
+        <h2>✍️ نیا اندراج</h2>
+        <button class="back-chip" type="button" onclick="goBackInApp()">↩ واپس</button>
+      </div>
+      <div class="card">
+        <label>اندراج کی قسم</label>
+        <select id="kind">
+          <option value="crop">کسان کی فصل فروخت</option>
+          <option value="buyerpay">خریدار سے رقم وصول</option>
+          <option value="farmerpay">کسان کو رقم ادا</option>
+          <option value="farmerdeposit">کسان کی طرف سے رقم جمع</option>
+          <option value="input_sale">سپرے / کھاد / بیج فروخت</option>
+          <option value="stock_buy">اسٹاک خریداری</option>
+          <option value="labor_pay">پلیدار کو مزدوری ادا</option>
+          <option value="expense">کاروباری خرچ</option>
+          <option value="fund_add">عشر / زکوٰۃ / عطیہ جمع</option>
+          <option value="fund_help">ضرورت مند کی مدد</option>
+          <option value="manual">دیگر دستی اندراج</option>
+        </select>
+        <div id="dynamic"></div>
+        <button class="primary" id="saveEntry" type="button">اندراج محفوظ کریں</button>
+      </div>
+    </section>
+
+    <section id="accounts" class="view">
+      <div class="tab-bar">
+        <h2>📒 کھاتے</h2>
+        <button class="back-chip" type="button" onclick="goBackInApp()">↩ واپس</button>
+      </div>
+      <div class="card">
+        <h2>نیا کھاتہ بنائیں</h2>
+        <label>کھاتے کی قسم</label>
+        <select id="accType">
+          <option value="farmer">کسان / اسٹور گاہک (ایک ہی کھاتہ)</option>
+          <option value="buyer">فصل کا خریدار</option>
+          <option value="labor">پلیدار</option>
+          <option value="supplier">کمپنی / ڈیلر</option>
+        </select>
+        <label>نام</label>
+        <input class="app-field" id="accName" type="text" placeholder="نام درج کریں">
+        <label>والد / کمپنی / شناخت</label>
+        <input class="app-field" id="accRef" type="text" placeholder="اختیاری">
+        <label>موبائل نمبر</label>
+        <input class="app-field" id="accPhone" type="tel" inputmode="tel" placeholder="اختیاری">
+        <button class="primary" id="addAcc" type="button">کھاتہ بنائیں</button>
+      </div>
+
+      <div class="card">
+        <h2>تمام کھاتے (تلاش و فلٹر)</h2>
+        <div class="grid">
+          <div>
+            <label>قسم کے مطابق دیکھیں</label>
+            <select id="filterAcc">
+              <option value="all">تمام</option>
+              <option value="farmer">کسان / گاہک</option>
+              <option value="buyer">خریدار</option>
+              <option value="labor">پلیدار</option>
+              <option value="supplier">کمپنی / ڈیلر</option>
+            </select>
+          </div>
+          <div>
+            <label>نام / فون / حوالہ تلاش کریں</label>
+            <div style="display:flex;gap:6px;">
+              <input class="app-field" id="searchAcc" type="search" placeholder="نام یا نمبر لکھیں">
+              <button class="secondary" type="button" onclick="$('searchAcc').value=''; renderAccounts();">✖</button>
+            </div>
+          </div>
+        </div>
+        <div id="accList" style="margin-top:12px;"></div>
+      </div>
+
+      <div class="card hidden" id="ledgerCard">
+        <div style="display:flex;justify-content:space-between;align-items:center;gap:8px;margin-bottom:8px;">
+          <h2 id="ledgerTitle" style="margin:0;">کھاتے کی تفصیل</h2>
+          <button class="back-chip" type="button" onclick="$('ledgerCard').classList.add('hidden')">✖ بند</button>
+        </div>
+        <div id="ledgerBody"></div>
+      </div>
+    </section>
+
+    <section id="stock" class="view">
+      <div class="tab-bar">
+        <h2>🌿 اسٹاک</h2>
+        <button class="back-chip" type="button" onclick="goBackInApp()">↩ واپس</button>
+      </div>
+      <div class="card">
+        <h2>اسٹاک آئٹم شامل کریں</h2>
+        <label>قسم</label>
+        <select id="prodType">
+          <option>سپرے</option>
+          <option>کھاد</option>
+          <option>بیج</option>
+          <option>دیگر</option>
+        </select>
+        <label>پروڈکٹ کا نام</label>
+        <input class="app-field" id="prodName" type="text" placeholder="پروڈکٹ کا نام لکھیں">
+        <div class="grid">
+          <div>
+            <label>ابتدائی مقدار</label>
+            <input class="app-field" id="prodQty" type="number" inputmode="decimal" step="any" placeholder="0">
+          </div>
+          <div>
+            <label>فی یونٹ خرید قیمت</label>
+            <input class="app-field" id="prodCost" type="number" inputmode="decimal" step="any" placeholder="0">
+          </div>
+        </div>
+        <label>یونٹ (بوری، عدد، کلو وغیرہ)</label>
+        <input class="app-field" id="prodUnit" type="text" placeholder="مثلاً بوری">
+        <button class="primary" id="addProduct" type="button">اسٹاک شامل کریں</button>
+      </div>
+
+      <div class="card">
+        <h2>موجودہ اسٹاک</h2>
+        <div id="stockList"></div>
+      </div>
+    </section>
+
+    <section id="fund" class="view">
+      <div class="tab-bar">
+        <h2>🕌 عشر و زکوٰۃ / فلاحی فنڈ</h2>
+        <button class="back-chip" type="button" onclick="goBackInApp()">↩ واپس</button>
+      </div>
+      <div class="card">
+        <div class="grid">
+          <div class="stat"><small>کل جمع</small><b id="fundIn">0 روپے</b></div>
+          <div class="stat"><small>کل امداد / ادائیگی</small><b id="fundOut">0 روپے</b></div>
+        </div>
+        <p class="muted" style="margin-top:8px;">عشر، زکوٰۃ اور اضافی عطیہ ایک مشترکہ فنڈ میں جمع ہوں گے، مگر ہر اندراج اپنی الگ مد کے ساتھ محفوظ ہوگا۔</p>
+        <div id="fundRows"></div>
+      </div>
+
+      <div class="card">
+        <h3>زکوٰۃ حساب معاون</h3>
+        <div class="notice">زکوٰۃ کے لیے صرف منافع اور کل سرمایہ دونوں پر الگ الگ 2.5% لگانا درست نہیں۔ یہ خانہ صرف تخمینہ/یاددہانی ہے؛ قابلِ زکوٰۃ اثاثوں، واجب الادا قرضوں، نصاب اور قمری سال کے حساب کی شرعی تصدیق مستند عالم سے کرائیں۔</div>
+        <label>آپ کی تصدیق شدہ قابلِ زکوٰۃ رقم (روپے)</label>
+        <input class="app-field" id="zBase" type="number" inputmode="decimal" step="any" placeholder="رقم درج کریں">
+        <label>شرح (%)</label>
+        <input class="app-field" id="zRate" type="number" inputmode="decimal" step="any" value="2.5">
+        <button class="secondary" id="calcZ" type="button" style="margin-top:10px;width:100%;">زکوٰۃ کا تخمینہ</button>
+        <p id="zResult" style="font-weight:800;color:var(--p1);margin-top:8px;"></p>
+      </div>
+    </section>
+
+    <section id="reports" class="view">
+      <div class="tab-bar">
+        <h2>📈 کاروباری رپورٹ و تلاش</h2>
+        <button class="back-chip" type="button" onclick="goBackInApp()">↩ واپس</button>
+      </div>
+      <div class="card">
+        <div class="stats-3">
+          <div class="stat"><small>آڑھت بروکری (0.15%)</small><b id="rBroker">0 روپے</b></div>
+          <div class="stat"><small>خریدار کمیشن (1.6%)</small><b id="rBuyerComm">0 روپے</b></div>
+          <div class="stat"><small>کاروباری اخراجات</small><b id="rExpense">0 روپے</b></div>
+          <div class="stat"><small>اسٹور فروخت</small><b id="rSales">0 روپے</b></div>
+        </div>
+        <div class="grid" style="margin-top:10px;">
+          <div>
+            <label>نام / فصل / تفصیل سے تلاش</label>
+            <input class="app-field" id="searchEntry" type="search" placeholder="نام یا تفصیل لکھیں">
+          </div>
+          <div>
+            <label>تاریخ کے مطابق فلٹر</label>
+            <div style="display:flex;gap:6px;">
+              <input class="app-field" id="filterDate" type="date">
+              <button class="secondary" type="button" onclick="$('searchEntry').value=''; $('filterDate').value=''; renderReports();">صاف</button>
+            </div>
+          </div>
+        </div>
+        <div id="reportRows" style="margin-top:10px;"></div>
+      </div>
+    </section>
+
+    <section id="backup" class="view">
+      <div class="tab-bar">
+        <h2>💿 ڈیٹا بیک اَپ</h2>
+        <button class="back-chip" type="button" onclick="goBackInApp()">↩ واپس</button>
+      </div>
+      <div class="card">
+        <p class="muted">اپنا تمام ڈیٹا JSON فائل میں محفوظ کریں۔ نئے موبائل یا براؤزر میں اسی فائل سے بحال کیا جا سکتا ہے۔</p>
+        <div class="actions">
+          <button class="secondary" id="exportBtn" type="button">بیک اَپ ڈاؤن لوڈ</button>
+          <button class="secondary" id="importBtn" type="button">بیک اَپ بحال کریں</button>
+        </div>
+        <input id="importFile" type="file" accept=".json,application/json" class="hidden">
+        <div class="notice">اہم: یہ ورژن آن لائن سرور یا خودکار کلاؤڈ سنک استعمال نہیں کرتا۔ بیک اَپ باقاعدگی سے اپنے پاس محفوظ رکھیں۔</div>
+        <button class="danger" id="clearBtn" type="button" style="width:100%;margin-top:10px;">تمام ڈیٹا ختم کریں</button>
+      </div>
+    </section>
+
+    <section id="settings" class="view">
+      <div class="tab-bar">
+        <h2>⚙️ سیٹنگز</h2>
+        <button class="back-chip" type="button" onclick="goBackInApp()">↩ واپس</button>
+      </div>
+      <div class="card">
+        <label>ایپ کا رنگ / تھیم</label>
+        <select id="setTheme">
+          <option value="green">زرعی سبز (ڈیفالٹ)</option>
+          <option value="royal">شاہی نیلا</option>
+          <option value="amber">گندمی سنہری</option>
+        </select>
+
+        <label>اوپننگ 4-ہندسوں کا PIN</label>
+        <select id="setPinEnabled">
+          <option value="yes">فعال (اوپن پر PIN مانگے)</option>
+          <option value="no">غیر فعال</option>
+        </select>
+
+        <label>نیا 4-ہندسوں کا PIN کوڈ</label>
+        <input class="app-field" id="setPinCode" type="tel" inputmode="numeric" maxlength="4" value="1234">
+
+        <label>دکان کا پتہ / فون نمبر (رسید کے لیے)</label>
+        <input class="app-field" id="setShopInfo" type="text" placeholder="مثلاً غلہ منڈی، فون: 0300-0000000">
+
+        <label>رسید میں پچھلا / نیا بیلنس دکھائیں؟</label>
+        <select id="setReceiptBal">
+          <option value="yes">ہاں (بقایا / جمع بیلنس شامل کریں)</option>
+          <option value="no">نہیں</option>
+        </select>
+
+        <button class="primary" id="saveSettingsBtn" type="button">سیٹنگز محفوظ کریں</button>
+      </div>
+    </section>
+  </main>
+
+  <footer class="app-footer">Developed by Shahryar Joyia</footer>
+
+  <div class="overlay center" id="editModal" onclick="if(event.target===this) closeEditModal()">
+    <div class="sheet">
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px;">
+        <strong id="editModalTitle" style="color:var(--p1);font-size:0.96rem;">✏️ ترمیم</strong>
+        <button class="back-chip" type="button" onclick="closeEditModal()">✖ بند</button>
+      </div>
+      <div id="editModalBody"></div>
+      <button class="primary" id="saveEditBtn" type="button">تبدیلی محفوظ کریں</button>
+    </div>
+  </div>
+
+  <div class="overlay center" id="receiptOverlay" onclick="if(event.target===this) closeReceipt()">
+    <div class="sheet">
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px;">
+        <strong style="color:var(--p1);font-size:0.95rem;">🧾 رسید</strong>
+        <button class="back-chip" type="button" onclick="closeReceipt()">✖ بند</button>
+      </div>
+
+      <div class="slip-box" id="slipView">
+        <div class="slip-head">
+          <h3>ارسلان مرتضیٰ اینڈ برادرز</h3>
+          <p id="slipShopSub">آڑھت، زرعی اسٹور اور مکمل کاروباری حساب</p>
+        </div>
+        <div id="slipLines"></div>
+        <div class="slip-amount-box">
+          <span>رقم</span>
+          <span id="slipAmountVal">0 روپے</span>
+        </div>
+      </div>
+
+      <div class="actions" style="margin-top:12px;">
+        <button class="primary" type="button" style="margin-top:0;" onclick="shareReceipt()">📤 شیئر (تصویر + متن)</button>
+        <button class="secondary" type="button" onclick="downloadReceiptPicture()">⬇️ ڈاؤن لوڈ (تصویر)</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="overlay center" id="pinOverlay">
+    <div class="sheet" style="max-width:340px;text-align:center;">
+      <div style="font-size:1.7rem;">🔐</div>
+      <h2 style="margin:4px 0 8px;">4-ہندسوں کا PIN درج کریں</h2>
+
+      <div class="pin-dots">
+        <div class="pin-slot" id="pSlot0"></div>
+        <div class="pin-slot" id="pSlot1"></div>
+        <div class="pin-slot" id="pSlot2"></div>
+        <div class="pin-slot" id="pSlot3"></div>
+      </div>
+
+      <div id="pinErr" style="color:var(--danger);font-size:0.82rem;font-weight:800;min-height:24px;"></div>
+
+      <div class="pin-keypad">
+        <button class="kb-key" type="button" onclick="pressPinDigit('1')">1</button>
+        <button class="kb-key" type="button" onclick="pressPinDigit('2')">2</button>
+        <button class="kb-key" type="button" onclick="pressPinDigit('3')">3</button>
+        <button class="kb-key" type="button" onclick="pressPinDigit('4')">4</button>
+        <button class="kb-key" type="button" onclick="pressPinDigit('5')">5</button>
+        <button class="kb-key" type="button" onclick="pressPinDigit('6')">6</button>
+        <button class="kb-key" type="button" onclick="pressPinDigit('7')">7</button>
+        <button class="kb-key" type="button" onclick="pressPinDigit('8')">8</button>
+        <button class="kb-key" type="button" onclick="pressPinDigit('9')">9</button>
+        <button class="kb-key danger-k" type="button" onclick="clearPinInput()">C</button>
+        <button class="kb-key" type="button" onclick="pressPinDigit('0')">0</button>
+        <button class="kb-key action" type="button" onclick="backspacePinInput()">⌫</button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const KEY = 'arslan_accounts_app_v1';
+    const SETTINGS_KEY = 'arslan_accounts_settings_v1';
+    const PIC_CREDIT = 'Developed by Shahryar Joyia';
+
+    let db = JSON.parse(localStorage.getItem(KEY) || '{"accounts":[],"entries":[],"products":[]}');
+    if (!Array.isArray(db.accounts)) db.accounts = [];
+    if (!Array.isArray(db.entries)) db.entries = [];
+    if (!Array.isArray(db.products)) db.products = [];
+
+    let cfg = Object.assign({
+      theme: 'green',
+      pinEnabled: 'yes',
+      pinCode: '1234',
+      shopInfo: 'آڑھت، زرعی اسٹور اور مکمل کاروباری حساب',
+      showReceiptBal: 'yes'
+    }, JSON.parse(localStorage.getItem(SETTINGS_KEY) || '{}'));
+
+    const $ = id => document.getElementById(id);
+    const money = n => (Number(n) || 0).toLocaleString('en-PK', { maximumFractionDigits: 2 }) + ' روپے';
+    const today = () => new Date().toISOString().slice(0, 10);
+    const esc = s => String(s ?? '').replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
+
+    let activeTab = 'home';
+    let tabStack = ['home'];
+    let pinBuffer = '';
+    let currentReceiptEntry = null;
+    let editState = null;
+
+    function toast(msg) {
+      const t = document.createElement('div');
+      t.className = 'toast';
+      t.textContent = msg;
+      $('toastBox').appendChild(t);
+      setTimeout(() => t.remove(), 2000);
+    }
+
+    function save() {
+      localStorage.setItem(KEY, JSON.stringify(db));
+      renderAll();
+    }
+
+    function saveSettings() {
+      const pin = String($('setPinCode').value || '').replace(/\D/g, '').slice(0, 4);
+      if (pin.length !== 4) return toast('4 ہندسوں کا PIN ضروری ہے');
+      cfg.theme = $('setTheme').value;
+      cfg.pinEnabled = $('setPinEnabled').value;
+      cfg.pinCode = pin;
+      cfg.shopInfo = ($('setShopInfo').value || '').trim() || 'آڑھت، زرعی اسٹور اور مکمل کاروباری حساب';
+      cfg.showReceiptBal = $('setReceiptBal').value;
+      localStorage.setItem(SETTINGS_KEY, JSON.stringify(cfg));
+      applyTheme();
+      toast('سیٹنگز محفوظ ہو گئیں');
+    }
+
+    function applyTheme() {
+      document.body.classList.remove('theme-royal', 'theme-amber');
+      if (cfg.theme === 'royal') document.body.classList.add('theme-royal');
+      if (cfg.theme === 'amber') document.body.classList.add('theme-amber');
+      $('setTheme').value = cfg.theme;
+      $('setPinEnabled').value = cfg.pinEnabled;
+      $('setPinCode').value = cfg.pinCode;
+      $('setShopInfo').value = cfg.shopInfo;
+      $('setReceiptBal').value = cfg.showReceiptBal || 'yes';
+      $('topShopSub').textContent = cfg.shopInfo;
+      $('slipShopSub').textContent = cfg.shopInfo;
+    }
+
+    function toggleDotsMenu(e) {
+      e.stopPropagation();
+      $('dotsMenu').classList.toggle('open');
+    }
+    function closeDotsMenu() { $('dotsMenu').classList.remove('open'); }
+    document.addEventListener('click', () => closeDotsMenu());
+
+    function activateTab(tabId) {
+      const target = $(tabId) ? tabId : 'home';
+      activeTab = target;
+      document.querySelectorAll('section.view').forEach(sec => sec.classList.remove('active'));
+      $(target).classList.add('active');
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+      renderAll();
+    }
+
+    function navigateTab(tabId) {
+      if (tabId === activeTab) return;
+      if (tabId === 'home') {
+        tabStack = ['home'];
+        history.pushState({ appTab: 'home' }, '', '#home');
+        activateTab('home');
+        return;
+      }
+      tabStack.push(tabId);
+      history.pushState({ appTab: tabId }, '', '#' + tabId);
+      activateTab(tabId);
+    }
+
+    function goBackInApp() {
+      if ($('editModal').classList.contains('open')) { closeEditModal(); return; }
+      if ($('receiptOverlay').classList.contains('open')) { closeReceipt(); return; }
+      if (tabStack.length > 1) history.back();
+      else activateTab('home');
+    }
+
+    window.addEventListener('popstate', () => {
+      if ($('editModal').classList.contains('open')) {
+        closeEditModal();
+        history.pushState({ appTab: activeTab }, '', '#' + activeTab);
+        return;
+      }
+      if ($('receiptOverlay').classList.contains('open')) {
+        closeReceipt();
+        history.pushState({ appTab: activeTab }, '', '#' + activeTab);
+        return;
+      }
+      if (tabStack.length > 1) {
+        tabStack.pop();
+        activateTab(tabStack[tabStack.length - 1] || 'home');
+      } else {
+        activateTab('home');
+      }
+    });
+
+    (function initAppPullToRefresh() {
+      const banner = $('ptrBanner');
+      const ptrIcon = $('ptrIcon');
+      const ptrText = $('ptrText');
+      const stage = $('appStage');
+      let startY = 0;
+      let pulling = false;
+      let isRefreshing = false;
+      const threshold = 74;
+
+      function resetPullVisual() {
+        banner.classList.remove('visible');
+        banner.style.transform = 'translate(-50%, -140px)';
+        stage.style.transform = '';
+      }
+
+      document.addEventListener('touchstart', e => {
+        if (isRefreshing || window.scrollY > 2) return;
+        if ($('pinOverlay').classList.contains('open') || $('editModal').classList.contains('open') || $('receiptOverlay').classList.contains('open')) return;
+        if (e.touches.length === 1) {
+          startY = e.touches[0].clientY;
+          pulling = true;
+        }
+      }, { passive: true });
+
+      document.addEventListener('touchmove', e => {
+        if (!pulling || isRefreshing) return;
+        const dy = e.touches[0].clientY - startY;
+        if (dy > 8 && window.scrollY <= 2) {
+          const pull = Math.min(dy * 0.45, 58);
+          banner.classList.add('visible');
+          banner.style.transform = `translate(-50%, ${pull - 48}px)`;
+          ptrIcon.style.transform = `rotate(${Math.min(dy * 2, 180)}deg)`;
+          ptrText.textContent = dy >= threshold ? 'چھوڑیں — حساب تازہ کریں' : 'کھینچ کر حساب تازہ کریں';
+          stage.style.transform = `translateY(${Math.min(pull * 0.35, 18)}px)`;
+        }
+      }, { passive: true });
+
+      document.addEventListener('touchend', e => {
+        if (!pulling || isRefreshing) return;
+        pulling = false;
+        const endY = e.changedTouches[0]?.clientY ?? startY;
+        const dy = endY - startY;
+
+        if (dy >= threshold && window.scrollY <= 2) {
+          isRefreshing = true;
+          banner.classList.add('visible', 'refreshing');
+          banner.style.transform = 'translate(-50%, 6px)';
+          ptrIcon.style.transform = '';
+          ptrText.textContent = 'حساب اپڈیٹ ہو رہا ہے...';
+          stage.style.transform = 'translateY(8px)';
+
+          setTimeout(() => {
+            renderAll();
+            isRefreshing = false;
+            banner.classList.remove('refreshing');
+            resetPullVisual();
+            toast('حساب تازہ ہو گیا');
+          }, 520);
+        } else {
+          resetPullVisual();
+        }
+      }, { passive: true });
+    })();
+
+    function renderPinSlots() {
+      for (let i = 0; i < 4; i++) $('pSlot' + i).textContent = pinBuffer[i] ? '●' : '';
+    }
+
+    function pressPinDigit(d) {
+      if (pinBuffer.length >= 4) return;
+      pinBuffer += d;
+      $('pinErr').textContent = '';
+      renderPinSlots();
+      if (pinBuffer.length === 4) {
+        if (pinBuffer === String(cfg.pinCode || '1234')) {
+          pinBuffer = '';
+          renderPinSlots();
+          $('pinOverlay').classList.remove('open');
+          toast('خوش آمدید');
+        } else {
+          $('pinErr').textContent = 'غلط PIN، دوبارہ کوشش کریں';
+          setTimeout(() => { pinBuffer = ''; renderPinSlots(); }, 350);
+        }
+      }
+    }
+
+    function backspacePinInput() { pinBuffer = pinBuffer.slice(0, -1); $('pinErr').textContent = ''; renderPinSlots(); }
+    function clearPinInput() { pinBuffer = ''; $('pinErr').textContent = ''; renderPinSlots(); }
+
+    function typeName(t) { return ({ farmer: 'کسان / گاہک', buyer: 'خریدار', labor: 'پلیدار', supplier: 'کمپنی / ڈیلر' })[t] || t; }
+    function accountOptions(type) {
+      return '<option value="">کھاتہ منتخب کریں</option>' +
+        db.accounts.filter(a => !type || a.type === type)
+          .map(a => `<option value="${a.id}">${esc(a.name)} (${typeName(a.type)})</option>`).join('');
+    }
+
+    function textField(label, id, placeholder = '', mode = 'urdu', defaultVal = '') {
+      const isNum = mode === 'num';
+      return `<label>${label}</label><input class="app-field" id="${id}" type="${isNum ? 'number' : 'text'}" ${isNum ? 'inputmode="decimal" step="any"' : ''} value="${esc(defaultVal)}" placeholder="${placeholder}">`;
+    }
+    function selectField(label, id, opts) { return `<label>${label}</label><select id="${id}">${opts}</select>`; }
+
+    function dynamicForm() {
+      const k = $('kind').value;
+      let h = '';
+      if (k === 'crop') {
+        h = selectField('کسان کا کھاتہ', 'xAcc', accountOptions('farmer')) +
+            selectField('فصل کا خریدار', 'xBuyer', accountOptions('buyer')) +
+            textField('فصل کا نام', 'xCrop', 'مثلاً کپاس', 'urdu') +
+            `<div class="grid"><div>${textField('وزن (من)', 'xMun', '0', 'num')}</div><div>${textField('باقی کلو', 'xKg', '0', 'num')}</div></div>` +
+            `<div class="grid"><div>${textField('فی من ریٹ', 'xRate', '0', 'num')}</div><div><label>مقررہ کٹوتی</label><input class="app-field" value="1.45% (خودکار)" disabled></div></div>` +
+            `<label>تاریخ</label><input class="app-field" id="xDate" type="date" value="${today()}">` +
+            textField('حوالہ / تفصیل', 'xNote', 'اختیاری', 'urdu');
+      } else if (k === 'buyerpay') {
+        h = selectField('خریدار کا کھاتہ', 'xAcc', accountOptions('buyer')) + textField('وصول شدہ رقم', 'xAmount', '0', 'num') + textField('کس نے / کہاں ادا کی؟', 'xNote', 'مثلاً منشی نے دفتر میں', 'urdu') + `<label>تاریخ</label><input class="app-field" id="xDate" type="date" value="${today()}">`;
+      } else if (k === 'farmerpay') {
+        h = selectField('کسان کا کھاتہ', 'xAcc', accountOptions('farmer')) + textField('ادا شدہ رقم', 'xAmount', '0', 'num') + textField('کس کو ادا کی؟', 'xWho', 'کسان، والد، بھائی وغیرہ', 'urdu') + textField('کہاں ادا کی؟', 'xWhere', 'دکان / گھر / بینک', 'urdu') + `<label>تاریخ</label><input class="app-field" id="xDate" type="date" value="${today()}">` + textField('حوالہ', 'xNote', '', 'urdu');
+      } else if (k === 'farmerdeposit') {
+        h = selectField('کسان کا کھاتہ', 'xAcc', accountOptions('farmer')) + textField('جمع شدہ رقم', 'xAmount', '0', 'num') + textField('کس نے جمع کروائی؟', 'xWho', 'کسان، والد، بھائی وغیرہ', 'urdu') + textField('کہاں جمع کروائی؟', 'xWhere', 'دکان / گھر', 'urdu') + `<label>تاریخ</label><input class="app-field" id="xDate" type="date" value="${today()}">` + textField('حوالہ', 'xNote', '', 'urdu');
+      } else if (k === 'input_sale') {
+        h = selectField('کسان / گاہک کا کھاتہ', 'xAcc', accountOptions('farmer')) + selectField('پروڈکٹ', 'xProduct', db.products.map(p => `<option value="${p.id}">${esc(p.name)} — دستیاب ${p.qty} ${esc(p.unit)}</option>`).join('')) + `<div class="grid"><div>${textField('مقدار', 'xQty', '0', 'num')}</div><div>${textField('فی یونٹ فروخت قیمت', 'xPrice', '0', 'num')}</div></div>` + `<label>تاریخ</label><input class="app-field" id="xDate" type="date" value="${today()}">` + textField('حوالہ', 'xNote', 'نقد / ادھار وغیرہ', 'urdu');
+      } else if (k === 'stock_buy') {
+        h = selectField('سپلائر / ڈیلر', 'xAcc', accountOptions('supplier')) + selectField('پروڈکٹ', 'xProduct', db.products.map(p => `<option value="${p.id}">${esc(p.name)}</option>`).join('')) + `<div class="grid"><div>${textField('خرید مقدار', 'xQty', '0', 'num')}</div><div>${textField('فی یونٹ خرید قیمت', 'xPrice', '0', 'num')}</div></div>` + textField('ٹرانسپورٹ / اضافی خرچ', 'xExtra', '0', 'num', '0') + `<label>تاریخ</label><input class="app-field" id="xDate" type="date" value="${today()}">` + textField('حوالہ', 'xNote', '', 'urdu');
+      } else if (k === 'labor_pay') {
+        h = selectField('پلیدار', 'xAcc', accountOptions('labor')) + textField('ادائیگی رقم', 'xAmount', '0', 'num') + textField('کس کسان / فصل کا کام؟', 'xWho', 'کسان یا فصل کا نام', 'urdu') + `<label>تاریخ</label><input class="app-field" id="xDate" type="date" value="${today()}">`;
+      } else if (k === 'expense') {
+        h = textField('خرچ کی مد', 'xCategory', 'بجلی، کرایہ، تنخواہ وغیرہ', 'urdu') + textField('رقم', 'xAmount', '0', 'num') + textField('کس کو ادا کیا؟', 'xWho', 'اختیاری', 'urdu') + `<label>تاریخ</label><input class="app-field" id="xDate" type="date" value="${today()}">` + textField('حوالہ', 'xNote', '', 'urdu');
+      } else if (k === 'fund_add') {
+        h = selectField('فنڈ کی مد', 'xCategory', '<option>زکوٰۃ</option><option>عشر</option><option>اضافی عطیہ</option>') + textField('رقم', 'xAmount', '0', 'num') + textField('فصل / ذریعہ / حوالہ', 'xNote', 'مثلاً اپنی گندم کا عشر', 'urdu') + `<label>تاریخ</label><input class="app-field" id="xDate" type="date" value="${today()}">`;
+      } else if (k === 'fund_help') {
+        h = textField('مستحق / وصول کنندہ کا نام', 'xWho', '', 'urdu') + selectField('امداد کی مد', 'xCategory', '<option>زکوٰۃ</option><option>عشر</option><option>عام عطیہ</option>') + textField('رقم', 'xAmount', '0', 'num') + textField('مدد کی تفصیل', 'xNote', '', 'urdu') + `<label>تاریخ</label><input class="app-field" id="xDate" type="date" value="${today()}">`;
+      } else if (k === 'manual') {
+        h = selectField('کھاتہ', 'xAcc', accountOptions()) + selectField('اندراج کی نوعیت', 'xDirection', '<option value="in">جمع / وصولی</option><option value="out">ادائیگی / کٹوتی</option>') + textField('رقم', 'xAmount', '0', 'num') + textField('حوالہ لازمی', 'xNote', 'تفصیل لکھیں', 'urdu') + `<label>تاریخ</label><input class="app-field" id="xDate" type="date" value="${today()}">`;
+      }
+      $('dynamic').innerHTML = h || '<p class="muted">پہلے متعلقہ کھاتہ یا اسٹاک آئٹم بنائیں۔</p>';
+    }
+
+    $('kind').addEventListener('change', dynamicForm);
+
+    $('addAcc').onclick = () => {
+      const name = $('accName').value.trim();
+      if (!name) return toast('نام درج کریں');
+      db.accounts.push({ id: crypto.randomUUID(), type: $('accType').value, name, ref: $('accRef').value.trim(), phone: $('accPhone').value.trim() });
+      $('accName').value = $('accRef').value = $('accPhone').value = '';
+      save();
+      toast('کھاتہ بن گیا');
+    };
+
+    $('addProduct').onclick = () => {
+      const name = $('prodName').value.trim();
+      const qty = Number($('prodQty').value);
+      const cost = Number($('prodCost').value);
+      if (!name || isNaN(qty) || qty < 0) return toast('پروڈکٹ اور درست مقدار درج کریں');
+      db.products.push({ id: crypto.randomUUID(), type: $('prodType').value, name, qty, cost: isNaN(cost) ? 0 : cost, unit: $('prodUnit').value.trim() || 'عدد' });
+      $('prodName').value = $('prodQty').value = $('prodCost').value = $('prodUnit').value = '';
+      save();
+      toast('اسٹاک شامل ہو گیا');
+    };
+
+    function addEntry(obj) {
+      db.entries.push({ id: crypto.randomUUID(), date: obj.date || today(), ...obj });
+      save();
+    }
+
+    $('saveEntry').onclick = () => {
+      const k = $('kind').value;
+      const v = id => $(id)?.value || '';
+      const n = id => Number(v(id)) || 0;
+      const acc = v('xAcc');
+      const date = v('xDate') || today();
+      const note = v('xNote').trim();
+
+      if (['crop', 'buyerpay', 'farmerpay', 'farmerdeposit', 'input_sale', 'stock_buy', 'labor_pay', 'manual'].includes(k) && !acc) {
+        return toast('متعلقہ کھاتہ منتخب کریں');
+      }
+
+      if (k === 'crop') {
+        const gross = n('xMun') * n('xRate') + (n('xKg') / 40) * n('xRate');
+        const rate = 1.45;
+        if (gross <= 0) return toast('وزن اور ریٹ درج کریں');
+        if (!v('xBuyer')) return toast('فصل کا خریدار منتخب کریں');
+        const totalDed = gross * rate / 100;
+        const net = gross - totalDed;
+        const batchId = crypto.randomUUID();
+
+        db.entries.push(
+          { id: crypto.randomUUID(), batchId, date, kind: k, account: acc, crop: v('xCrop').trim(), mun: n('xMun'), kg: n('xKg'), rate: n('xRate'), gross, deduction: totalDed, dedRate: rate, net, ref: note },
+          { id: crypto.randomUUID(), batchId, date, kind: 'buyer_crop', account: v('xBuyer'), crop: v('xCrop').trim(), gross, commission: gross * 0.016, total: gross * 1.016, ref: 'کسان کی فصل کی خریداری' },
+          { id: crypto.randomUUID(), batchId, date, kind: 'fund_split', fund: 'پلیداری', amount: gross * 0.01, ref: 'فصل کی پلیداری' },
+          { id: crypto.randomUUID(), batchId, date, kind: 'fund_split', fund: 'بروکری', amount: gross * 0.0015, ref: 'فصل کی بروکری' },
+          { id: crypto.randomUUID(), batchId, date, kind: 'fund_split', fund: 'ٹیکس', amount: gross * 0.003, ref: 'فصل کا ٹیکس' }
+        );
+        save();
+      } else if (['buyerpay', 'farmerpay', 'farmerdeposit', 'labor_pay', 'manual'].includes(k)) {
+        const amt = n('xAmount');
+        if (amt <= 0) return toast('رقم درج کریں');
+        addEntry({ kind: k, account: acc, amount: amt, who: v('xWho').trim(), where: v('xWhere').trim(), direction: v('xDirection'), note, date, category: v('xCategory') });
+      } else if (['input_sale', 'stock_buy'].includes(k)) {
+        const p = db.products.find(x => x.id === v('xProduct'));
+        const qty = n('xQty');
+        const price = n('xPrice');
+        if (!p || qty <= 0 || price <= 0) return toast('پروڈکٹ، مقدار اور قیمت درج کریں');
+        if (k === 'input_sale' && qty > p.qty) return toast('اسٹاک میں اتنی مقدار موجود نہیں');
+        const amount = qty * price;
+        if (k === 'input_sale') p.qty -= qty; else p.qty += qty;
+        addEntry({ kind: k, account: acc, product: p.name, productId: p.id, qty, price, amount, extra: n('xExtra'), note, date });
+      } else if (['expense', 'fund_add', 'fund_help'].includes(k)) {
+        const amt = n('xAmount');
+        if (amt <= 0) return toast('رقم درج کریں');
+        addEntry({ kind: k, amount: amt, category: v('xCategory'), who: v('xWho').trim(), note, date });
+      }
+
+      toast('اندراج محفوظ ہو گیا');
+      $('kind').value = 'crop';
+      dynamicForm();
+    };
+
+    function entryEffectOnAccount(e, a) {
+      if (!a || e.account !== a.id) return 0;
+      if (a.type === 'farmer') {
+        if (e.kind === 'crop') return Number(e.net) || 0;
+        if (e.kind === 'input_sale' || e.kind === 'farmerdeposit' || e.kind === 'farmerpay') return -(Number(e.amount) || 0);
+        if (e.kind === 'manual') return e.direction === 'in' ? (Number(e.amount) || 0) : -(Number(e.amount) || 0);
+      } else if (a.type === 'buyer') {
+        if (e.kind === 'buyer_crop') return Number(e.total) || 0;
+        if (e.kind === 'buyerpay') return -(Number(e.amount) || 0);
+        if (e.kind === 'manual') return e.direction === 'in' ? (Number(e.amount) || 0) : -(Number(e.amount) || 0);
+      } else if (a.type === 'labor') {
+        if (e.kind === 'labor_pay') return -(Number(e.amount) || 0);
+        if (e.kind === 'manual') return e.direction === 'in' ? (Number(e.amount) || 0) : -(Number(e.amount) || 0);
+      } else if (a.type === 'supplier') {
+        if (e.kind === 'stock_buy') return (Number(e.amount) || 0) + (Number(e.extra) || 0);
+        if (e.kind === 'manual') return e.direction === 'in' ? (Number(e.amount) || 0) : -(Number(e.amount) || 0);
+      }
+      return 0;
+    }
+
+    function balanceFor(id) {
+      const a = db.accounts.find(x => x.id === id);
+      if (!a) return 0;
+      return db.entries.reduce((s, e) => s + entryEffectOnAccount(e, a), 0);
+    }
+
+    function balanceBeforeEntry(entry) {
+      const a = db.accounts.find(x => x.id === entry.account);
+      if (!a) return null;
+      const idx = db.entries.findIndex(x => x.id === entry.id);
+      if (idx === -1) return null;
+      let prev = 0;
+      for (let i = 0; i < idx; i++) {
+        prev += entryEffectOnAccount(db.entries[i], a);
+      }
+      const next = prev + entryEffectOnAccount(entry, a);
+      return { prev, next };
+    }
+
+    function labelEntry(e) {
+      return ({
+        crop: 'فصل فروخت',
+        buyer_crop: 'فصل خریداری (+1.6% کمیشن)',
+        buyerpay: 'خریدار سے وصولی',
+        farmerpay: 'کسان کو ادائیگی',
+        farmerdeposit: 'کسان کی جمع رقم',
+        input_sale: 'زرعی اشیا فروخت',
+        stock_buy: 'اسٹاک خریداری',
+        labor_pay: 'پلیدار کو ادائیگی',
+        expense: 'کاروباری خرچ',
+        fund_add: 'فنڈ میں جمع',
+        fund_help: 'ضرورت مند کی مدد',
+        manual: 'دستی اندراج'
+      })[e.kind] || e.kind;
+    }
+
+    function entryAmountVal(e) {
+      return Number(e.net ?? e.amount ?? e.total ?? (e.gross ? e.gross * 1.016 : 0)) || 0;
+    }
+
+    window.deleteEntryById = id => {
+      const target = db.entries.find(e => e.id === id);
+      if (!target) return;
+      if (!confirm('کیا آپ اس اندراج کو حذف کرنا چاہتے ہیں؟')) return;
+      if (target.batchId) {
+        db.entries = db.entries.filter(e => e.batchId !== target.batchId);
+      } else {
+        db.entries = db.entries.filter(e => e.id !== id);
+      }
+      save();
+      toast('اندراج حذف ہو گیا');
+    };
+
+    window.openEditEntry = id => {
+      const e = db.entries.find(x => x.id === id);
+      if (!e) return;
+      editState = { type: 'entry', id };
+      $('editModalTitle').textContent = '✏️ اندراج میں ترمیم';
+      const amtVal = entryAmountVal(e);
+      $('editModalBody').innerHTML =
+        `<label>تاریخ</label><input class="app-field" id="edDate" type="date" value="${esc(e.date || today())}">` +
+        textField('رقم (روپے)', 'edAmt', '0', 'num', String(amtVal)) +
+        textField('تفصیل / حوالہ', 'edNote', 'تفصیل', 'urdu', String(e.note || e.ref || e.who || ''));
+      $('editModal').classList.add('open');
+    };
+
+    window.openEditAccount = id => {
+      const a = db.accounts.find(x => x.id === id);
+      if (!a) return;
+      editState = { type: 'account', id };
+      $('editModalTitle').textContent = '✏️ کھاتے میں ترمیم';
+      $('editModalBody').innerHTML =
+        textField('نام', 'edAccName', 'نام', 'urdu', a.name) +
+        textField('والد / کمپنی / شناخت', 'edAccRef', '', 'urdu', a.ref || '') +
+        textField('موبائل نمبر', 'edAccPhone', '', 'num', a.phone || '');
+      $('editModal').classList.add('open');
+    };
+
+    window.deleteAccountById = id => {
+      const a = db.accounts.find(x => x.id === id);
+      if (!a) return;
+      if (!confirm(`کیا آپ "${a.name}" کا کھاتہ اور اس کے اندراجات حذف کرنا چاہتے ہیں؟`)) return;
+      db.accounts = db.accounts.filter(x => x.id !== id);
+      db.entries = db.entries.filter(e => e.account !== id);
+      $('ledgerCard').classList.add('hidden');
+      save();
+      toast('کھاتہ حذف ہو گیا');
+    };
+
+    function closeEditModal() {
+      $('editModal').classList.remove('open');
+      editState = null;
+    }
+
+    $('saveEditBtn').onclick = () => {
+      if (!editState) return;
+      if (editState.type === 'entry') {
+        const e = db.entries.find(x => x.id === editState.id);
+        if (!e) return;
+        const newDate = $('edDate').value || today();
+        const newAmt = Number($('edAmt').value);
+        const newNote = ($('edNote').value || '').trim();
+        if (isNaN(newAmt) || newAmt <= 0) return toast('درست رقم درج کریں');
+        e.date = newDate;
+        if ('net' in e) e.net = newAmt;
+        else if ('total' in e) e.total = newAmt;
+        else e.amount = newAmt;
+        if ('note' in e) e.note = newNote;
+        else e.ref = newNote;
+        save();
+        closeEditModal();
+        toast('اندراج اپڈیٹ ہو گیا');
+      } else if (editState.type === 'account') {
+        const a = db.accounts.find(x => x.id === editState.id);
+        if (!a) return;
+        const newName = ($('edAccName').value || '').trim();
+        if (!newName) return toast('نام خالی نہیں ہو سکتا');
+        a.name = newName;
+        a.ref = ($('edAccRef').value || '').trim();
+        a.phone = ($('edAccPhone').value || '').trim();
+        save();
+        closeEditModal();
+        toast('کھاتہ اپڈیٹ ہو گیا');
+      }
+    };
+
+    function buildReceiptDetails(e) {
+      const accObj = db.accounts.find(a => a.id === e.account);
+      const partyName = accObj ? accObj.name : (e.who || e.category || e.fund || 'عام اندراج');
+      const lines = [
+        ['رسید نمبر', String(e.id || '').slice(0, 8)],
+        ['تاریخ', e.date || today()],
+        ['قسم', e.fund || labelEntry(e)],
+        ['نام / کھاتہ', partyName]
+      ];
+      if (e.crop) lines.push(['فصل', e.crop]);
+      if (e.mun || e.kg) lines.push(['وزن', `${e.mun || 0} من ${e.kg || 0} کلو`]);
+      if (e.rate) lines.push(['فی من ریٹ', money(e.rate)]);
+      if (e.gross) lines.push(['کل رقم', money(e.gross)]);
+      if (e.deduction) lines.push(['کٹوتی (1.45%)', money(e.deduction)]);
+      if (e.commission) lines.push(['کمیشن (1.6%)', money(e.commission)]);
+      if (e.product) lines.push(['پروڈکٹ', `${e.product} (${e.qty || 0})`]);
+      if (e.price) lines.push(['فی یونٹ قیمت', money(e.price)]);
+      if (e.where) lines.push(['مقام', e.where]);
+      if (e.note || e.ref) lines.push(['تفصیل', e.note || e.ref]);
+
+      if ((cfg.showReceiptBal || 'yes') === 'yes') {
+        const balInfo = balanceBeforeEntry(e);
+        if (balInfo) {
+          lines.push(['پچھلا بیلنس', money(balInfo.prev)]);
+          lines.push(['نیا بیلنس', money(balInfo.next)]);
+        }
+      }
+
+      return {
+        lines,
+        amountText: money(entryAmountVal(e))
+      };
+    }
+
+    function buildReceiptDescriptionText(e) {
+      const info = buildReceiptDetails(e);
+      return [
+        'ارسلان مرتضیٰ اینڈ برادرز — رسید',
+        cfg.shopInfo || '',
+        ...info.lines.map(([k, v]) => `${k}: ${v}`),
+        `کل رقم: ${info.amountText}`,
+        PIC_CREDIT
+      ].filter(Boolean).join('\n');
+    }
+
+    function renderReceiptCanvas(e) {
+      const info = buildReceiptDetails(e);
+      const w = 720;
+      const h = 236 + info.lines.length * 46 + 92;
+      const canvas = document.createElement('canvas');
+      canvas.width = w;
+      canvas.height = h;
+      const ctx = canvas.getContext('2d');
+
+      ctx.fillStyle = '#ffffff';
+      ctx.fillRect(0, 0, w, h);
+
+      ctx.strokeStyle = '#0b3320';
+      ctx.lineWidth = 8;
+      ctx.strokeRect(14, 14, w - 28, h - 28);
+
+      ctx.fillStyle = '#0b3320';
+      ctx.fillRect(22, 22, w - 44, 104);
+
+      ctx.fillStyle = '#ffffff';
+      ctx.textAlign = 'center';
+      ctx.font = 'bold 28px "IBM Plex Sans Arabic", "Cairo", sans-serif';
+      ctx.fillText('ارسلان مرتضیٰ اینڈ برادرز', w / 2, 68);
+
+      ctx.fillStyle = '#fef08a';
+      ctx.font = 'bold 16px "IBM Plex Sans Arabic", "Cairo", sans-serif';
+      ctx.fillText(cfg.shopInfo || 'آڑھت، زرعی اسٹور اور مکمل کاروباری حساب', w / 2, 103);
+
+      let y = 166;
+      info.lines.forEach(([k, v]) => {
+        ctx.textAlign = 'right';
+        ctx.fillStyle = '#334155';
+        ctx.font = 'bold 19px "IBM Plex Sans Arabic", "Cairo", sans-serif';
+        ctx.fillText(`${k}:`, w - 42, y);
+
+        ctx.textAlign = 'left';
+        ctx.fillStyle = '#0f172a';
+        ctx.font = 'bold 19px "IBM Plex Sans Arabic", "Cairo", sans-serif';
+        ctx.fillText(String(v), 42, y);
+        y += 46;
+      });
+
+      ctx.fillStyle = '#f0fdf4';
+      ctx.fillRect(36, y - 14, w - 72, 54);
+      ctx.strokeStyle = '#15803d';
+      ctx.lineWidth = 2;
+      ctx.strokeRect(36, y - 14, w - 72, 54);
+
+      ctx.textAlign = 'right';
+      ctx.fillStyle = '#064e3b';
+      ctx.font = 'bold 22px "IBM Plex Sans Arabic", "Cairo", sans-serif';
+      ctx.fillText('کل رقم', w - 52, y + 20);
+
+      ctx.textAlign = 'left';
+      ctx.fillText(info.amountText, 52, y + 20);
+
+      ctx.textAlign = 'center';
+      ctx.fillStyle = '#64748b';
+      ctx.font = '13px sans-serif';
+      ctx.fillText(PIC_CREDIT, w / 2, h - 22);
+
+      return canvas;
+    }
+
+    function receiptPngBlob(e) {
+      const canvas = renderReceiptCanvas(e);
+      return new Promise(resolve => canvas.toBlob(blob => resolve(blob), 'image/png'));
+    }
+
+    window.openReceiptById = entryId => {
+      const e = db.entries.find(x => x.id === entryId);
+      if (!e) return;
+      currentReceiptEntry = e;
+      const info = buildReceiptDetails(e);
+      $('slipLines').innerHTML = info.lines.map(([k, v]) =>
+        `<div class="slip-line"><span>${esc(k)}</span><strong>${esc(v)}</strong></div>`
+      ).join('');
+      $('slipAmountVal').textContent = info.amountText;
+      $('receiptOverlay').classList.add('open');
+    };
+
+    function closeReceipt() {
+      $('receiptOverlay').classList.remove('open');
+    }
+
+    window.downloadReceiptPicture = async () => {
+      if (!currentReceiptEntry) return;
+      const blob = await receiptPngBlob(currentReceiptEntry);
+      if (!blob) return;
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = `receipt-${String(currentReceiptEntry.id).slice(0, 8)}.png`;
+      a.click();
+      setTimeout(() => URL.revokeObjectURL(url), 1200);
+      toast('رسید کی تصویر ڈاؤن لوڈ ہو گئی');
+    };
+
+    window.shareReceipt = async () => {
+      if (!currentReceiptEntry) return;
+      const text = buildReceiptDescriptionText(currentReceiptEntry);
+      const blob = await receiptPngBlob(currentReceiptEntry);
+      const file = blob ? new File([blob], `receipt-${String(currentReceiptEntry.id).slice(0, 8)}.png`, { type: 'image/png' }) : null;
+
+      if (navigator.share && file && (!navigator.canShare || navigator.canShare({ files: [file] }))) {
+        try {
+          await navigator.share({
+            title: 'ارسلان مرتضیٰ اینڈ برادرز — رسید',
+            text,
+            files: [file]
+          });
+          toast('رسید تصویر اور متن کے ساتھ شیئر ہو گئی');
+          return;
+        } catch (err) {
+          if (err && err.name === 'AbortError') return;
+        }
+      }
+
+      if (file) {
+        const url = URL.createObjectURL(file);
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = file.name;
+        a.click();
+        setTimeout(() => URL.revokeObjectURL(url), 1200);
+      }
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(text).catch(() => {});
+      }
+      toast('تصویر ڈاؤن لوڈ اور متن کاپی ہو گیا');
+    };
+
+    window.showLedger = id => {
+      const a = db.accounts.find(x => x.id === id);
+      if (!a) return;
+      $('ledgerCard').classList.remove('hidden');
+      $('ledgerTitle').textContent = `${a.name} — ${typeName(a.type)}`;
+      const es = db.entries.filter(e => e.account === id).slice().reverse();
+      $('ledgerBody').innerHTML = es.length
+        ? `<div class="table-wrap"><table><tr><th>تاریخ / تفصیل</th><th>رقم</th><th>آپشنز</th></tr>` +
+          es.map(e => `<tr><td>${esc(e.date)}<br><strong>${esc(labelEntry(e))}</strong><br><span class="muted">${esc(e.note || e.ref || e.who || '')}</span></td><td>${money(entryAmountVal(e))}</td><td><div class="row-btns"><button class="secondary" type="button" onclick="openReceiptById('${e.id}')">رسید</button><button class="secondary" type="button" onclick="openEditEntry('${e.id}')">ترمیم</button><button class="danger" type="button" onclick="deleteEntryById('${e.id}')">حذف</button></div></td></tr>`).join('') +
+          `</table></div><h3>موجودہ بیلنس: ${money(balanceFor(id))}</h3>`
+        : '<p class="muted">اس کھاتے میں ابھی کوئی لین دین نہیں۔</p>';
+    };
+
+    function renderAccounts() {
+      const f = $('filterAcc').value;
+      const q = ($('searchAcc')?.value || '').trim().toLowerCase();
+      const list = db.accounts.filter(a => {
+        if (f !== 'all' && a.type !== f) return false;
+        if (!q) return true;
+        return [a.name, a.ref, a.phone, typeName(a.type)].some(x => String(x || '').toLowerCase().includes(q));
+      });
+
+      $('accList').innerHTML = list.length
+        ? `<div class="table-wrap"><table><tr><th>نام</th><th>قسم</th><th>بیلنس</th><th>آپشنز</th></tr>` +
+          list.map(a => `<tr><td><strong>${esc(a.name)}</strong>${a.ref ? `<br><span class="muted">${esc(a.ref)}</span>` : ''}${a.phone ? `<br><span class="muted">${esc(a.phone)}</span>` : ''}</td><td>${typeName(a.type)}</td><td><strong>${money(balanceFor(a.id))}</strong></td><td><div class="row-btns"><button class="secondary" type="button" onclick="showLedger('${a.id}')">کھاتہ</button><button class="secondary" type="button" onclick="openEditAccount('${a.id}')">ترمیم</button><button class="danger" type="button" onclick="deleteAccountById('${a.id}')">حذف</button></div></td></tr>`).join('') +
+          `</table></div>`
+        : '<p class="muted">کوئی کھاتہ نہیں ملا۔</p>';
+    }
+
+    $('filterAcc').onchange = renderAccounts;
+    $('searchAcc').addEventListener('input', renderAccounts);
+
+    function renderStock() {
+      $('stockList').innerHTML = db.products.length
+        ? `<div class="table-wrap"><table><tr><th>پروڈکٹ</th><th>مقدار</th><th>خرید قیمت</th></tr>` +
+          db.products.map(p => `<tr><td><strong>${esc(p.name)}</strong><br><span class="muted">${esc(p.type)}</span></td><td>${p.qty} ${esc(p.unit)}</td><td>${money(p.cost)}</td></tr>`).join('') +
+          `</table></div>`
+        : '<p class="muted">اسٹاک خالی ہے۔</p>';
+    }
+
+    function renderFunds() {
+      const ins = db.entries.filter(e => e.kind === 'fund_add');
+      const outs = db.entries.filter(e => e.kind === 'fund_help');
+      const inSum = ins.reduce((s, e) => s + (Number(e.amount) || 0), 0);
+      const outSum = outs.reduce((s, e) => s + (Number(e.amount) || 0), 0);
+
+      $('fundIn').textContent = money(inSum);
+      $('fundOut').textContent = money(outSum);
+      $('charityFund').textContent = money(inSum - outSum);
+
+      const combined = [...ins.map(e => ({ ...e, dir: 'in' })), ...outs.map(e => ({ ...e, dir: 'out' }))].sort((a, b) => String(b.date).localeCompare(String(a.date)));
+      $('fundRows').innerHTML = combined.length
+        ? `<div class="table-wrap" style="margin-top:10px;"><table><tr><th>تاریخ</th><th>مد / تفصیل</th><th>رقم</th><th>آپشنز</th></tr>` +
+          combined.map(e => `<tr><td>${esc(e.date)}</td><td><span class="pill ${e.dir === 'out' ? 'pill-out' : ''}">${e.dir === 'in' ? 'جمع' : 'امداد'}</span> <strong>${esc(e.category || '')}</strong><br><span class="muted">${esc(e.who || e.note || '')}</span></td><td><strong>${money(e.amount)}</strong></td><td><div class="row-btns"><button class="secondary" type="button" onclick="openReceiptById('${e.id}')">رسید</button><button class="danger" type="button" onclick="deleteEntryById('${e.id}')">حذف</button></div></td></tr>`).join('') +
+          `</table></div>`
+        : '<p class="muted">ابھی کوئی فنڈ اندراج نہیں۔</p>';
+    }
+
+    $('calcZ').onclick = () => {
+      const base = Number($('zBase').value) || 0;
+      const rate = Number($('zRate').value) || 2.5;
+      $('zResult').textContent = `اندازاً زکوٰۃ (${rate}%): ${money(base * rate / 100)}`;
+    };
+
+    function renderReports() {
+      const brokerSum = db.entries.filter(e => e.kind === 'fund_split' && e.fund === 'بروکری').reduce((s, e) => s + (Number(e.amount) || 0), 0);
+      const buyerCommSum = db.entries.filter(e => e.kind === 'buyer_crop').reduce((s, e) => s + (Number(e.commission) || 0), 0);
+      const expenseSum = db.entries.filter(e => e.kind === 'expense').reduce((s, e) => s + (Number(e.amount) || 0), 0);
+      const salesSum = db.entries.filter(e => e.kind === 'input_sale').reduce((s, e) => s + (Number(e.amount) || 0), 0);
+
+      $('rBroker').textContent = money(brokerSum);
+      $('rBuyerComm').textContent = money(buyerCommSum);
+      $('rExpense').textContent = money(expenseSum);
+      $('rSales').textContent = money(salesSum);
+
+      const q = ($('searchEntry')?.value || '').trim().toLowerCase();
+      const dFilter = ($('filterDate')?.value || '').trim();
+
+      const filteredList = db.entries.slice().reverse().filter(e => {
+        if (dFilter && e.date !== dFilter) return false;
+        if (!q) return true;
+        const accName = db.accounts.find(a => a.id === e.account)?.name || '';
+        return [accName, e.crop, e.product, e.category, e.fund, e.note, e.ref, e.who, labelEntry(e)]
+          .some(x => String(x || '').toLowerCase().includes(q));
+      }).slice(0, 30);
+
+      $('reportRows').innerHTML = filteredList.length
+        ? `<div class="table-wrap" style="margin-top:10px;"><table><tr><th>تاریخ</th><th>نوعیت / کھاتہ</th><th>رقم</th><th>آپشنز</th></tr>` +
+          filteredList.map(e => {
+            const accName = db.accounts.find(a => a.id === e.account)?.name || '';
+            return `<tr><td>${esc(e.date)}</td><td><strong>${esc(e.fund || labelEntry(e))}</strong>${accName ? ` — <span>${esc(accName)}</span>` : ''}<br><span class="muted">${esc(e.crop || e.product || e.category || e.note || e.ref || e.who || '-')}</span></td><td><strong>${money(entryAmountVal(e))}</strong></td><td><div class="row-btns"><button class="secondary" type="button" onclick="openReceiptById('${e.id}')">رسید</button><button class="secondary" type="button" onclick="openEditEntry('${e.id}')">ترمیم</button><button class="danger" type="button" onclick="deleteEntryById('${e.id}')">حذف</button></div></td></tr>`;
+          }).join('') +
+          `</table></div>`
+        : '<p class="muted">رپورٹ کے لیے کوئی اندراج نہیں ملا۔</p>';
+    }
+
+    $('searchEntry').addEventListener('input', renderReports);
+    $('filterDate').addEventListener('change', renderReports);
+
+    function renderHome() {
+      const t = today();
+      $('todayCount').textContent = db.entries.filter(e => e.date === t).length;
+      $('stockCount').textContent = db.products.length;
+      const sumFund = name => db.entries.filter(e => e.kind === 'fund_split' && e.fund === name).reduce((s, e) => s + (Number(e.amount) || 0), 0);
+      $('laborFund').textContent = money(sumFund('پلیداری'));
+      $('brokerFund').textContent = money(sumFund('بروکری'));
+      $('taxFund').textContent = money(sumFund('ٹیکس'));
+
+      const rec = db.entries.slice().reverse().slice(0, 8);
+      $('recent').innerHTML = rec.length
+        ? `<div class="table-wrap"><table><tr><th>تاریخ</th><th>اندراج</th><th>رقم</th><th>آپشنز</th></tr>` +
+          rec.map(e => {
+            const accName = db.accounts.find(a => a.id === e.account)?.name || '';
+            return `<tr><td>${esc(e.date)}</td><td><strong>${esc(e.fund || labelEntry(e))}</strong>${accName ? ` — <span>${esc(accName)}</span>` : ''}<br><span class="muted">${esc(e.crop || e.product || e.category || e.note || e.ref || e.who || '')}</span></td><td><strong>${money(entryAmountVal(e))}</strong></td><td><div class="row-btns"><button class="secondary" type="button" onclick="openReceiptById('${e.id}')">رسید</button><button class="secondary" type="button" onclick="openEditEntry('${e.id}')">ترمیم</button><button class="danger" type="button" onclick="deleteEntryById('${e.id}')">حذف</button></div></td></tr>`;
+          }).join('') +
+          `</table></div>`
+        : '<p class="muted">ابھی کوئی اندراج درج نہیں کیا گیا۔</p>';
+    }
+
+    function renderAll() {
+      renderHome();
+      renderAccounts();
+      renderStock();
+      renderFunds();
+      renderReports();
+      if (activeTab === 'entry') dynamicForm();
+    }
+
+    $('saveSettingsBtn').onclick = saveSettings;
+
+    $('exportBtn').onclick = () => {
+      const blob = new Blob([JSON.stringify({ data: db, settings: cfg }, null, 2)], { type: 'application/json' });
+      const a = document.createElement('a');
+      a.href = URL.createObjectURL(blob);
+      a.download = `arslan-brothers-backup-${today()}.json`;
+      a.click();
+      toast('بیک اَپ ڈاؤن لوڈ ہو گیا');
+    };
+
+    $('importBtn').onclick = () => $('importFile').click();
+
+    $('importFile').onchange = e => {
+      const file = e.target.files[0];
+      if (!file) return;
+      const reader = new FileReader();
+      reader.onload = () => {
+        try {
+          const parsed = JSON.parse(reader.result);
+          const nextDb = parsed.data && Array.isArray(parsed.data.entries) ? parsed.data : parsed;
+          if (nextDb && Array.isArray(nextDb.entries)) {
+            db = {
+              accounts: Array.isArray(nextDb.accounts) ? nextDb.accounts : [],
+              entries: nextDb.entries,
+              products: Array.isArray(nextDb.products) ? nextDb.products : []
+            };
+            if (parsed.settings) {
+              cfg = Object.assign(cfg, parsed.settings);
+              localStorage.setItem(SETTINGS_KEY, JSON.stringify(cfg));
+              applyTheme();
+            }
+            save();
+            toast('بیک اَپ بحال ہو گیا');
+          } else {
+            toast('درست بیک اَپ فائل نہیں');
+          }
+        } catch {
+          toast('فائل پڑھنے میں مسئلہ آیا');
+        }
+      };
+      reader.readAsText(file);
+      e.target.value = '';
+    };
+
+    $('clearBtn').onclick = () => {
+      if (!confirm('کیا آپ واقعی تمام کھاتے، اسٹاک اور اندراجات مستقل ختم کرنا چاہتے ہیں؟')) return;
+      db = { accounts: [], entries: [], products: [] };
+      save();
+      toast('تمام ڈیٹا ختم کر دیا گیا');
+    };
+
+    applyTheme();
+    dynamicForm();
+    renderAll();
+    history.replaceState({ appTab: 'home' }, '', '#home');
+
+    if (cfg.pinEnabled !== 'no') {
+      pinBuffer = '';
+      renderPinSlots();
+      $('pinOverlay').classList.add('open');
+    }
+
+    if ('serviceWorker' in navigator) {
+      window.addEventListener('load', () => {
+        navigator.serviceWorker.register('./sw.js').catch(() => {});
+      });
+    }
+  </script>
+</body>
+</html>
