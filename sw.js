@@ -1,4 +1,4 @@
-const CACHE_NAME = 'arslan-accounts-v8';
+const CACHE_NAME = 'arslan-accounts-v9';
 const ASSETS = [
   './',
   './index.html',
